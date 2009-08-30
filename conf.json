@@ -1,0 +1,8 @@
+{"github":{"user":"holizz"},
+ "gitorious":{
+	 "user":"holizz",
+	 "password":null,
+	 "project":"holizz-github"
+ },
+ "tmp_dir":"./gh"
+}

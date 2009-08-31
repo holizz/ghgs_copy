@@ -56,13 +56,16 @@ class Copier:
             print ' '.join(cmd)
             subprocess.call(cmd)
 
+            # Normalise repo name for the benefit of Gitorious
+            normrepo = re.sub('\.', '_', repo)
+
             # Create repo if not present in Gitorious
-            if repo not in gs_repos:
-                self.gs_create_repo(repo, gh_repos[repo])
+            if normrepo not in gs_repos:
+                self.gs_create_repo(normrepo, gh_repos[repo])
 
             # Push GitHub repo to Gitorious
             d = self.conf['gitorious']
-            d.update({'repo': repo})
+            d.update({'repo': normrepo})
             gs_rurl = self.gs_push % d
             # git remote add
             cmd = ['git','--git-dir='+rpath,'remote','add','gitorious',gs_rurl]

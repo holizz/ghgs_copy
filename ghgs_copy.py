@@ -52,7 +52,9 @@ class Copier:
             d.update({'repo': repo})
             rurl = self.gh_clone % d
             rpath = os.path.join(self.conf['tmp_dir'],repo)
-            subprocess.call(['git','clone','--mirror',rurl,rpath])
+            cmd = ['git','clone','--mirror',rurl,rpath]
+            print ' '.join(cmd)
+            subprocess.call(cmd)
 
             # Create repo if not present in Gitorious
             if repo not in gs_repos:
@@ -63,9 +65,13 @@ class Copier:
             d.update({'repo': repo})
             gs_rurl = self.gs_push % d
             # git remote add
-            subprocess.call(['git','--git-dir='+rpath,'remote','add','gitorious',gs_rurl])
+            cmd = ['git','--git-dir='+rpath,'remote','add','gitorious',gs_rurl]
+            print ' '.join(cmd)
+            subprocess.call(cmd)
             # git push
-            subprocess.call(['git','--git-dir='+rpath,'push','--mirror','gitorious'])
+            cmd = ['git','--git-dir='+rpath,'push','--mirror','gitorious']
+            print ' '.join(cmd)
+            subprocess.call(cmd)
 
         if not self.temp:
             shutil.rmtree(self.conf['tmp_dir'])

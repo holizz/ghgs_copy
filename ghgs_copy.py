@@ -5,6 +5,9 @@
 # The user you're running this as must have push access to the Gitorious
 # account, but GitHub repos are cloned over git://
 
+# Ensure that the Gitorious project specified in conf.json exists, it won't
+# be created for you
+
 # Shorthand: gh=GitHub, gs=Gitorious
 
 import getpass
